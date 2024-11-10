@@ -47,12 +47,18 @@ namespace Services.Service
 
         public async Task<Contrato> CreateContrato(ContratoDtoIn contratoDto)
         {
+            if (contratoDto.FechaInicio > contratoDto.FechaFin || contratoDto.FechaInicio == contratoDto.FechaFin)
+            {
+                throw new ArgumentException("La fecha de inicio no puede ser mayor o igual que la fecha de fin.");
+            }
+
             var newContrato = new Contrato();
 
             newContrato.FechaFin = contratoDto.FechaFin;
             newContrato.FechaInicio = contratoDto.FechaInicio;
             newContrato.IdEquipo = contratoDto.IdEquipo;
-            newContrato.IdPersona = contratoDto.IdPersona;
+            newContrato.IdPersona = contratoDto.IdPersona;  
+            
 
             _contex.Contrato.Add(newContrato);
             await _contex.SaveChangesAsync();
