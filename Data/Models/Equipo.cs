@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.Models;
+namespace Data.Models;
 
 public partial class Equipo
 {

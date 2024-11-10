@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Models;
+namespace Data.Models;
 
 public partial class Grupo13Context : DbContext
 {

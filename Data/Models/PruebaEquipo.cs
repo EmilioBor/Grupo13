@@ -3,21 +3,19 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.Models;
+namespace Data.Models;
 
-public partial class Contrato
+public partial class PruebaEquipo
 {
     public int Id { get; set; }
 
-    public DateOnly FechaFin { get; set; }
+    public int Posicion { get; set; }
 
-    public DateOnly FechaInicio { get; set; }
-
-    public int IdPersona { get; set; }
+    public int IdPrueba { get; set; }
 
     public int IdEquipo { get; set; }
 
     public virtual Equipo IdEquipoNavigation { get; set; }
 
-    public virtual Persona IdPersonaNavigation { get; set; }
+    public virtual Prueba IdPruebaNavigation { get; set; }
 }
