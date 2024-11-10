@@ -8,5 +8,12 @@ namespace Core.Response
 {
     public class ContratoDtoOut
     {
+        public DateTime FechaFin { get; set; }
+
+        public DateTime FechaInicio { get; set; }
+
+        public string? NombrePersona { get; set; }
+
+        public string? NombreEquipo { get; set; }
     }
 }

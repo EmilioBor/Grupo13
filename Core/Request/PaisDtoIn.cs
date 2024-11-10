@@ -8,5 +8,8 @@ namespace Core.Request
 {
     public class PaisDtoIn
     {
+        public int Id { get; set; }
+
+        public string? Nombre { get; set; }
     }
 }

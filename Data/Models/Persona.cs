@@ -15,7 +15,7 @@ public partial class Persona
 
     public int Dni { get; set; }
 
-    public DateOnly FechaNacimiento { get; set; }
+    public DateTime FechaNacimiento { get; set; }
 
     public int IdPais { get; set; }
 

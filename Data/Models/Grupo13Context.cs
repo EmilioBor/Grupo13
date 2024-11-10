@@ -125,7 +125,9 @@ public partial class Grupo13Context : DbContext
             entity.Property(e => e.CantEtapas).HasColumnName("cantEtapas");
             entity.Property(e => e.IdPersona).HasColumnName("idPersona");
             entity.Property(e => e.KmTotales).HasColumnName("kmTotales");
-            entity.Property(e => e.Nombre).HasColumnName("nombre");
+            entity.Property(e => e.Nombre)
+                .IsRequired()
+                .HasColumnName("nombre");
 
             entity.HasOne(d => d.IdPersonaNavigation).WithMany(p => p.Prueba)
                 .HasForeignKey(d => d.IdPersona)

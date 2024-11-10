@@ -8,5 +8,12 @@ namespace Core.Request
 {
     public class EquipoDtoIn
     {
+        public int Id { get; set; }
+
+        public string? Nombre { get; set; }
+
+        public int IdPais { get; set; }
+
+        public int IdPersona { get; set; }
     }
 }

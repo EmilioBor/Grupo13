@@ -9,9 +9,9 @@ public partial class Contrato
 {
     public int Id { get; set; }
 
-    public DateOnly FechaFin { get; set; }
+    public DateTime FechaFin { get; set; }
 
-    public DateOnly FechaInicio { get; set; }
+    public DateTime FechaInicio { get; set; }
 
     public int IdPersona { get; set; }
 
