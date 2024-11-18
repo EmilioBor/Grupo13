@@ -39,5 +39,39 @@ namespace Informe6.Controllers
 
             return CreatedAtAction(nameof(GetByIdContrato), new {id = newContrato.Id}, newContrato);
         }
+
+        [HttpPut("api/v1/updateContrato/{id}")]
+        public async Task<IActionResult> UpdateContrato(int id, ContratoDtoIn contratoDto)
+        {
+            var contratoExist = await GetByIdContrato(id);
+            if(contratoExist == null)
+            {
+                return NotFound("El contrato con este id no existe");
+            }
+            if(contratoExist is not null)
+            {
+                await _service.UpdateContrato(id, contratoDto);
+                return Ok("Listo");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("api/v1/deletecontrato/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var toDelete = await _service.GetByIdContrato(id);
+
+            if (toDelete is not null)
+            {
+                await _service.Delete(id);
+                return Ok("Contrato Eliminada");
+            }
+            else
+            {
+                return NotFound("No existe Contrato Con ese ID");
+            }
+        }
     }
 }

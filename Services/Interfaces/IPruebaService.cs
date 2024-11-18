@@ -9,5 +9,7 @@ namespace Services.Interfaces
         Task<IEnumerable<PruebaDtoOut>> GetAllPrueba();
         Task<PruebaDtoOut?> GetByIdPrueba(int id);
         Task<Prueba> CreatePrueba(PruebaDtoIn pruebaDto);
+        Task UpdatePrueba(int id, PruebaDtoIn pruebaDto);
+        Task Delete(int id);
     }
 }

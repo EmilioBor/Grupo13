@@ -42,6 +42,11 @@ namespace Services.Service
                 }).SingleOrDefaultAsync();
         }
 
+        public async Task<Pais?> GetById(int id)
+        {
+            return await _contex.Pais.FindAsync(id);
+        }
+
         public async Task<Pais> CreatePais(PaisDtoIn paisDto)
         {
             var newPais = new Pais();
@@ -52,6 +57,26 @@ namespace Services.Service
             await _contex.SaveChangesAsync();
 
             return newPais;
+        }
+        public async Task UpdatePais(int id, PaisDtoIn paisDto)
+        {
+            var exist = await GetById(id);
+
+            if (exist is not null)
+            {
+                exist.Nombre = paisDto.Nombre;
+                await _contex.SaveChangesAsync();
+            }
+        }
+        public async Task Delete(int id)
+        {
+            var ToDelete = await GetById(id);
+
+            if (ToDelete is not null)
+            {
+                _contex.Pais.Remove(ToDelete);
+                await _contex.SaveChangesAsync();
+            }
         }
     }
 }

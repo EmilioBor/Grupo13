@@ -48,6 +48,11 @@ namespace Services.Service
                 }).SingleOrDefaultAsync();
         }
 
+        public async Task<Persona?> GetById(int id)
+        {
+            return await _contex.Persona.FindAsync(id);
+        }
+
         public async Task<Persona> CreatePersona(PersonaDtoIn personaDto)
         {
             var newPersona = new Persona();
@@ -63,6 +68,32 @@ namespace Services.Service
             await _contex.SaveChangesAsync();
 
             return newPersona;
+        }
+
+        public async Task UpdatePersona(int id, PersonaDtoIn personaDto)
+        {
+            var exist = await GetById(id);
+
+            if (exist is not null)
+            {
+                exist.Nombre = personaDto.Nombre;
+                exist.Apellido = personaDto.Apellido;
+                exist.Dni = personaDto.Dni;
+                exist.FechaNacimiento = personaDto.FechaNacimiento;
+                exist.IdPais = personaDto.IdPais;
+
+                await _contex.SaveChangesAsync();
+            }
+        }
+        public async Task Delete(int id)
+        {
+            var ToDelete = await GetById(id);
+
+            if (ToDelete is not null)
+            {
+                _contex.Persona.Remove(ToDelete);
+                await _contex.SaveChangesAsync();
+            }
         }
     }
 }

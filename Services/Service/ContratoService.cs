@@ -44,6 +44,10 @@ namespace Services.Service
 
                 }).SingleOrDefaultAsync();
         }
+        public async Task<Contrato?> GetById(int id)
+        {
+            return await _contex.Contrato.FindAsync(id);
+        }
 
         public async Task<Contrato> CreateContrato(ContratoDtoIn contratoDto)
         {
@@ -64,6 +68,30 @@ namespace Services.Service
             await _contex.SaveChangesAsync();
 
             return newContrato;
+        }
+        public async Task UpdateContrato(int id, ContratoDtoIn contratoDto)
+        {
+            var exis = await GetById(id);
+            if( exis is not null)
+            {
+                exis.FechaInicio = contratoDto.FechaInicio;
+                exis.FechaInicio = contratoDto.FechaInicio;
+                exis.IdEquipo = contratoDto.IdEquipo;
+                exis.IdPersona = contratoDto.IdPersona;
+
+
+                await _contex.SaveChangesAsync();
+            }
+        }
+        public async Task Delete(int id)
+        {
+            var ToDelete = await GetById(id);
+
+            if (ToDelete is not null)
+            {
+                _contex.Contrato.Remove(ToDelete);
+                await _contex.SaveChangesAsync();
+            }
         }
     }
 }

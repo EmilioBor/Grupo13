@@ -47,6 +47,10 @@ namespace Services.Service
 
                 }).SingleOrDefaultAsync();
         }
+        public async Task<Prueba?> GetById(int id)
+        {
+            return await _contex.Prueba.FindAsync(id);
+        }
 
         public async Task<Prueba> CreatePrueba(PruebaDtoIn pruebaDto)
         {
@@ -63,6 +67,29 @@ namespace Services.Service
             await _contex.SaveChangesAsync();
 
             return newPrueba;
+        }
+        public async Task UpdatePrueba(int id, PruebaDtoIn pruebaDto)
+        {
+            var exist = await GetById(id);
+            if(exist != null)
+            {
+                exist.Nombre = pruebaDto.Nombre;
+                exist.AñoEdicion = pruebaDto.AñoEdicion;
+                exist.CantEtapas = pruebaDto.CantEtapas;
+                exist.KmTotales = pruebaDto.KmTotales;
+                exist.IdPersona = pruebaDto.IdPersona;
+                await _contex.SaveChangesAsync();
+            }
+        }
+        public async Task Delete(int id)
+        {
+            var ToDelete = await GetById(id);
+
+            if (ToDelete is not null)
+            {
+                _contex.Prueba.Remove(ToDelete);
+                await _contex.SaveChangesAsync();
+            }
         }
     }
 }

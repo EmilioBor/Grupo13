@@ -39,5 +39,38 @@ namespace Informe6.Controllers
 
             return CreatedAtAction(nameof(GetByIdPruebaEquipo), new { id = newPruebaEquipo.Id }, newPruebaEquipo);
         }
+        [HttpPut("api/v1/updatepruebaequipo/{id}")]
+        public async Task<IActionResult> UpdatePruebaEquipo(int id, PruebaEquipoDtoIn pruebaEquipoDto)
+        {
+            var exis = await GetByIdPruebaEquipo(id);
+            if (exis is not null)
+            {
+                await _service.UpdatePruebaEquipo(id, pruebaEquipoDto);
+                return Ok("Listo");
+            }
+            if (exis == null)
+            {
+                return NotFound("No existe pruebaequipo con ese ID");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("api/v1/deletepruebaequipo/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var toDelete = await _service.GetByIdPruebaEquipo(id);
+
+            if (toDelete is not null)
+            {
+                await _service.Delete(id);
+                return Ok("PruebaEquipo Eliminada");
+            }
+            else
+            {
+                return NotFound("No existe Prueba Equipo Con ese ID");
+            }
+        }
     }
 }

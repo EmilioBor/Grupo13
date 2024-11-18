@@ -39,5 +39,38 @@ namespace Informe6.Controllers
 
             return CreatedAtAction(nameof(GetByIdPais), new { id = newPais.Id }, newPais);
         }
+        [HttpPut("api/v1/updatepais/{id}")]
+        public async Task<IActionResult> UpdatePais(int id, PaisDtoIn paisDto)
+        {
+            var exis = await GetByIdPais(id);
+            if (exis is not null)
+            {
+                await _service.UpdatePais(id, paisDto);
+                return Ok("Listo");
+            }
+            if (exis == null)
+            {
+                return NotFound("No existe pais con ese ID");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("api/v1/deletepais/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var toDelete = await _service.GetByIdPais(id);
+
+            if (toDelete is not null)
+            {
+                await _service.Delete(id);
+                return Ok("Pais Eliminada");
+            }
+            else
+            {
+                return NotFound("No existe Pais Con ese ID");
+            }
+        }
     }
 }

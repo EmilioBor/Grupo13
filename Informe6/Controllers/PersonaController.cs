@@ -6,7 +6,7 @@ using Services.Interfaces;
 
 namespace Informe6.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class PersonaController : ControllerBase
     {
@@ -38,6 +38,39 @@ namespace Informe6.Controllers
             var newPersona = await _service.CreatePersona(personaDto);
 
             return CreatedAtAction(nameof(GetByIdPersona), new { id = newPersona.Id }, newPersona);
+        }
+        [HttpPut("api/v1/updatepersona/{id}")]
+        public async Task<IActionResult> UpdatePersona(int id, PersonaDtoIn personaDto)
+        {
+            var exis = await GetByIdPersona(id);
+            if (exis is not null)
+            {
+                await _service.UpdatePersona(id, personaDto);
+                return Ok("Listo");
+            }
+            if (exis == null)
+            {
+                return NotFound("No existe persona con ese ID");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpDelete("api/v1/deletepersona/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var toDelete = await _service.GetByIdPersona(id);
+
+            if (toDelete is not null)
+            {
+                await _service.Delete(id);
+                return Ok("Persona Eliminada");
+            }
+            else
+            {
+                return NotFound("No existe Persona Con ese ID");
+            }
         }
     }
 }
