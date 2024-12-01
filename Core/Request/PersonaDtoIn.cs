@@ -19,5 +19,6 @@ namespace Core.Request
         public DateTime FechaNacimiento { get; set; }
 
         public int IdPais { get; set; }
+        public bool Rol { get; set; }
     }
 }

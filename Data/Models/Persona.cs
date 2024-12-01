@@ -19,6 +19,8 @@ public partial class Persona
 
     public int IdPais { get; set; }
 
+    public bool Rol { get; set; }
+
     public virtual ICollection<Contrato> Contrato { get; set; } = new List<Contrato>();
 
     public virtual ICollection<Equipo> Equipo { get; set; } = new List<Equipo>();

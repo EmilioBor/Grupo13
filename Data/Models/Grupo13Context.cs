@@ -106,6 +106,7 @@ public partial class Grupo13Context : DbContext
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasColumnName("nombre");
+            entity.Property(e => e.Rol).HasColumnName("rol");
 
             entity.HasOne(d => d.IdPaisNavigation).WithMany(p => p.Persona)
                 .HasForeignKey(d => d.IdPais)

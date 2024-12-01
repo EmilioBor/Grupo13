@@ -28,7 +28,8 @@ namespace Services.Service
                     Apellido = p.Apellido,
                     Dni = p.Dni,
                     FechaNacimiento = p.FechaNacimiento,
-                    NombrePais = p.IdPaisNavigation.Nombre
+                    NombrePais = p.IdPaisNavigation.Nombre,
+                    Rol = p.Rol
 
                 }).ToListAsync();
         }
@@ -43,7 +44,8 @@ namespace Services.Service
                     Apellido = p.Apellido,
                     Dni = p.Dni,
                     FechaNacimiento = p.FechaNacimiento,
-                    NombrePais = p.IdPaisNavigation.Nombre
+                    NombrePais = p.IdPaisNavigation.Nombre,
+                    Rol = p.Rol
 
                 }).SingleOrDefaultAsync();
         }
@@ -62,6 +64,7 @@ namespace Services.Service
             newPersona.Dni = personaDto.Dni;
             newPersona.FechaNacimiento = personaDto.FechaNacimiento;
             newPersona.IdPais = personaDto.IdPais;
+            newPersona.Rol = personaDto.Rol;
             
 
             _contex.Persona.Add(newPersona);
@@ -81,6 +84,7 @@ namespace Services.Service
                 exist.Dni = personaDto.Dni;
                 exist.FechaNacimiento = personaDto.FechaNacimiento;
                 exist.IdPais = personaDto.IdPais;
+                exist.Rol = personaDto.Rol;
 
                 await _contex.SaveChangesAsync();
             }

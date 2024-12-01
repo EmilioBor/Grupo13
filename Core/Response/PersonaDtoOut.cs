@@ -19,5 +19,6 @@ namespace Core.Response
         public DateTime FechaNacimiento { get; set; }
 
         public string? NombrePais { get; set; }
+        public bool Rol { get; set; }
     }
 }

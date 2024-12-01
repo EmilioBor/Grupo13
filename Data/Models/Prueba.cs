@@ -9,8 +9,6 @@ public partial class Prueba
 {
     public int Id { get; set; }
 
-    public int AñoEdicion { get; set; }
-
     public int CantEtapas { get; set; }
 
     public float KmTotales { get; set; }
@@ -18,6 +16,8 @@ public partial class Prueba
     public int IdPersona { get; set; }
 
     public string Nombre { get; set; }
+
+    public int AñoEdicion { get; set; }
 
     public virtual Persona IdPersonaNavigation { get; set; }
 
