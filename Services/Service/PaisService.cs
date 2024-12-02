@@ -36,9 +36,8 @@ namespace Services.Service
                 .Where(p => p.Id == id)
                 .Select(p => new PaisDtoOut
                 {
-                    Nombre = p.Nombre
-                    
-
+                    Id = p.Id,
+                    Nombre = p.Nombre  
                 }).SingleOrDefaultAsync();
         }
 

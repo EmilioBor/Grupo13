@@ -24,11 +24,10 @@ namespace Services.Service
             return await _contex.PruebaEquipo
                 .Select(p => new PruebaEquipoDtoOut
                 {
+                    Id = p.Id,
                     Posicion = p.Posicion,
                     NombreEquipo = p.IdEquipoNavigation.Nombre,
                     NombrePrueba = p.IdPruebaNavigation.Nombre
-                    
-
                 }).ToListAsync();
         }
         public async Task<PruebaEquipoDtoOut?> GetByIdPruebaEquipo(int id)
@@ -37,7 +36,7 @@ namespace Services.Service
                 .Where(p => p.Id == id)
                 .Select(p => new PruebaEquipoDtoOut
                 {
-
+                    Id = p.Id,
                     Posicion = p.Posicion,
                     NombreEquipo = p.IdEquipoNavigation.Nombre,
                     NombrePrueba = p.IdPruebaNavigation.Nombre

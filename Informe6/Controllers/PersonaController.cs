@@ -32,6 +32,16 @@ namespace Informe6.Controllers
             }
             return Ok(persona);
         }
+        [HttpGet("api/v1/buscarciclista")]
+        public async Task<IEnumerable<PersonaDtoOut?>> GetCiclista()
+        {
+            return await _service.GetCiclista();
+        }
+        [HttpGet("api/v1/buscardirector")]
+        public async Task<IEnumerable<PersonaDtoOut?>> GetByRol()
+        {
+            return await _service.GetByRolPersona();
+        }
         [HttpPost("api/v1/createpersona")]
         public async Task<IActionResult> CreatePersona(PersonaDtoIn personaDto)
         {

@@ -13,5 +13,7 @@ namespace Services.Interfaces
         Task<Persona> CreatePersona(PersonaDtoIn personaDto);
         Task UpdatePersona(int id, PersonaDtoIn personaDto);
         Task Delete(int id);
+        Task<IEnumerable<PersonaDtoOut?>> GetByRolPersona();
+        Task<IEnumerable<PersonaDtoOut?>> GetCiclista();
     }
 }

@@ -24,7 +24,7 @@ namespace Services.Service
             return await _contex.Equipo
                 .Select(e => new EquipoDtoOut
                 {
-
+                    Id = e.Id,
                     Nombre = e.Nombre,
                     NombrePais = e.IdPaisNavigation.Nombre,
                     NombrePersona = e.IdPersonaNavigation.Nombre
@@ -37,14 +37,26 @@ namespace Services.Service
                 .Where(e => e.Id == id)
                 .Select(e => new EquipoDtoOut
                 {
-
+                    Id = e.Id,
                     Nombre = e.Nombre,
                     NombrePais = e.IdPaisNavigation.Nombre,
                     NombrePersona = e.IdPersonaNavigation.Nombre
 
                 }).SingleOrDefaultAsync();
         }
+        public async Task<EquipoDtoOut?> GetByNombreEquipo(string nombre)
+        {
+            return await _contex.Equipo
+                .Where(e => e.Nombre == nombre)
+                .Select(e => new EquipoDtoOut
+                {
+                    Id = e.Id,
+                    Nombre = e.Nombre,
+                    NombrePais = e.IdPaisNavigation.Nombre,
+                    NombrePersona = e.IdPersonaNavigation.Nombre
 
+                }).SingleOrDefaultAsync();
+        }
         public async Task<Equipo?> GetById(int id)
         {
             return await _contex.Equipo.FindAsync(id);

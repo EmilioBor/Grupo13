@@ -24,6 +24,7 @@ namespace Services.Service
             return await _contex.Prueba
                 .Select(p => new PruebaDtoOut
                 {
+                    Id = p.Id,
                     Nombre = p.Nombre,
                     AñoEdicion = p.AñoEdicion,
                     CantEtapas = p.CantEtapas,
@@ -38,7 +39,7 @@ namespace Services.Service
                 .Where(p => p.Id == id)
                 .Select(p => new PruebaDtoOut
                 {
-
+                    Id = p.Id,
                     Nombre = p.Nombre,
                     AñoEdicion = p.AñoEdicion,
                     CantEtapas = p.CantEtapas,

@@ -32,7 +32,17 @@ namespace Informe6.Controllers
             }
             return Ok(contrato);
         }
-        [HttpPost("api/v1/createcontrato")]
+        [HttpGet("api/v1/buscarcontrato/{nombre}")]
+        public async Task<ActionResult<ContratoDtoOut>> GetByEquipoContrato(string nombre)
+        {
+            var contrato = await _service.GetByEquipoContrato(nombre);
+            if (contrato == null)
+            {
+                return NotFound("El contrato con ese id NO EXISTE");
+            }
+            return Ok(contrato);
+        }
+            [HttpPost("api/v1/createcontrato")]
         public async Task<IActionResult> CreateContrato(ContratoDtoIn contratoDto)
         {
             var newContrato = await _service.CreateContrato(contratoDto);

@@ -24,6 +24,7 @@ namespace Services.Service
             return await _contex.Persona
                 .Select(p => new PersonaDtoOut
                 {
+                    Id = p.Id,
                     Nombre = p.Nombre,
                     Apellido = p.Apellido,
                     Dni = p.Dni,
@@ -39,7 +40,7 @@ namespace Services.Service
                 .Where(p => p.Id == id)
                 .Select(p => new PersonaDtoOut
                 {
-
+                    Id = p.Id,
                     Nombre = p.Nombre,
                     Apellido = p.Apellido,
                     Dni = p.Dni,
@@ -49,7 +50,36 @@ namespace Services.Service
 
                 }).SingleOrDefaultAsync();
         }
-
+        public async Task<IEnumerable<PersonaDtoOut?>> GetCiclista()
+        {
+            return await _contex.Persona
+                .Where(p => p.Rol == true)
+                .Select(p => new PersonaDtoOut
+                {
+                    Id = p.Id,
+                    Nombre = p.Nombre,
+                    Apellido = p.Apellido,
+                    Dni = p.Dni,
+                    FechaNacimiento = p.FechaNacimiento,
+                    NombrePais = p.IdPaisNavigation.Nombre,
+                    Rol = p.Rol
+                }).ToListAsync();
+        }
+        public async Task<IEnumerable<PersonaDtoOut?>> GetByRolPersona()
+        {
+            return await _contex.Persona
+                .Where(p => p.Rol == false)
+                .Select(p => new PersonaDtoOut
+            {
+                Id = p.Id,
+                Nombre = p.Nombre,
+                Apellido = p.Apellido,
+                Dni = p.Dni,
+                FechaNacimiento = p.FechaNacimiento,
+                NombrePais = p.IdPaisNavigation.Nombre,
+                Rol = p.Rol
+            }).ToListAsync();
+        }
         public async Task<Persona?> GetById(int id)
         {
             return await _contex.Persona.FindAsync(id);

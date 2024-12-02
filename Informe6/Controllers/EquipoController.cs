@@ -32,6 +32,16 @@ namespace Informe6.Controllers
             }
             return Ok(equipo);
         }
+        [HttpGet("api/v1/buscarequiponombre/{nombre}")]
+        public async Task<ActionResult<EquipoDtoOut>> GetByNombreEquipo(string nombre)
+        {
+            var equipo = await _service.GetByNombreEquipo(nombre);
+            if (equipo == null)
+            {
+                return NotFound("El equipo con ese id NO EXISTE");
+            }
+            return Ok(equipo);
+        }
         [HttpPost("api/v1/createequipo")]
         public async Task<IActionResult> CreateEquipo(EquipoDtoIn equipoDto)
         {

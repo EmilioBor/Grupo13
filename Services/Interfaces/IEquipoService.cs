@@ -13,5 +13,6 @@ namespace Services.Interfaces
         Task<Equipo> CreateEquipo(EquipoDtoIn equipoDto);
         Task UpdateEquipo(int id, EquipoDtoIn equipoDto);
         Task Delete(int id);
+        Task<EquipoDtoOut?> GetByNombreEquipo(string nombre);
     }
 }

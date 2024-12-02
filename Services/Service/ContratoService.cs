@@ -23,7 +23,7 @@ namespace Services.Service
         {
             return await _contex.Contrato
                 .Select(c => new ContratoDtoOut {
-
+                    Id = c.Id,
                     FechaFin = c.FechaFin,
                     FechaInicio = c.FechaInicio,
                     NombreEquipo = c.IdEquipoNavigation.Nombre,
@@ -36,7 +36,7 @@ namespace Services.Service
             return await _contex.Contrato
                 .Where(c => c.Id == id)
                 .Select(c => new ContratoDtoOut {
-
+                    Id = c.Id,
                     FechaFin = c.FechaFin,
                     FechaInicio = c.FechaInicio,
                     NombreEquipo = c.IdEquipoNavigation.Nombre,
@@ -48,6 +48,22 @@ namespace Services.Service
         {
             return await _contex.Contrato.FindAsync(id);
         }
+
+        public async Task<IEnumerable<ContratoDtoOut?>> GetByEquipoContrato(string nombre)
+        {
+            return await _contex.Contrato
+                .Where(c => c.IdEquipoNavigation.Nombre == nombre)
+                .Select(c => new ContratoDtoOut
+                {
+                    Id = c.Id,
+                    FechaFin = c.FechaFin,
+                    FechaInicio = c.FechaInicio,
+                    NombreEquipo = c.IdEquipoNavigation.Nombre,
+                    NombrePersona = c.IdPersonaNavigation.Nombre + " " + c.IdPersonaNavigation.Apellido
+
+                }).ToListAsync();
+        }
+        
 
         public async Task<Contrato> CreateContrato(ContratoDtoIn contratoDto)
         {

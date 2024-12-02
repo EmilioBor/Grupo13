@@ -13,5 +13,6 @@ namespace Services.Interfaces
         Task<Contrato> CreateContrato(ContratoDtoIn contratoDto);
         Task UpdateContrato(int id, ContratoDtoIn contratoDto);
         Task Delete(int id);
+        Task<IEnumerable<ContratoDtoOut?>> GetByEquipoContrato(string nombre);
     }
 }
