@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "http://localhost:3001")
+            policy.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3000/")
             .AllowAnyHeader()
             .AllowAnyMethod();
         });
@@ -52,7 +52,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("_myAlloeSpecificOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
